@@ -3,7 +3,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 
 // ---------- SignUp form ----------
-final signUpFormProvider = Provider.autoDispose<FormGroup>((ref) {
+final signUpFormProvider = Provider<FormGroup>((ref) {
   return FormGroup({
     'email' : FormControl<String>(validators: [Validators.required, Validators.email]),
     'password' : FormControl<String>(validators: [
@@ -18,7 +18,7 @@ final signUpFormProvider = Provider.autoDispose<FormGroup>((ref) {
 });
 
 // ---------- is obscureText ----------
-final isObscureTextProvider = StateProvider.autoDispose<bool>((ref) {
+final isObscureTextProvider = StateProvider<bool>((ref) {
   return true;
 });
 

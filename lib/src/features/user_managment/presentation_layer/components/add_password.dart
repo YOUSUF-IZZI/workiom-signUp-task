@@ -38,7 +38,9 @@ class AddPasswordComponent extends ConsumerWidget {
                       ref.read(isPasswordStrongProvider.notifier).state = true;
                     }
                     else {
-                      ref.read(indicatorCounterProvider.notifier).state= 0.0; }
+                      ref.read(indicatorCounterProvider.notifier).state= 0.0;
+                      ref.read(isPasswordStrongProvider.notifier).state = false;
+                    }
                     // Conditions of Password length checker provider & Password upercase checker provider
                     if (signUpForm.control('password').value.toString().length < 7) {
                       ref.read(passwordLengthCheckerProvider.notifier).state = false;
