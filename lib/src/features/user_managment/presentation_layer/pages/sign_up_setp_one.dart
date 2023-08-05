@@ -4,6 +4,7 @@ import 'package:workiom/src/features/user_managment/presentation_layer/component
 import 'package:workiom/src/features/user_managment/presentation_layer/components/workiom_bottom_label.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/pages/sing_up_step_two.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/widgets/custom_material_button.dart';
+import 'package:workiom/src/features/user_managment/presentation_layer/widgets/sign_up_with_google_button.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/widgets/terms_of_privacy_policy_text.dart';
 
 
@@ -27,28 +28,21 @@ class SignUpPageStepOne extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 19.h,),
-
               Text(
                 'Create your free account',
                 style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold, letterSpacing: 0.36.sp, color: const Color(0xFF0E0F12),),
               ),
               SizedBox(height: 8.h,),
-
               const WavingLabel(),
               SizedBox(height: 120.h,),
-
-              GestureDetector(
-                child: Image.asset('assets/icons/user_managment/google.png', height: 50.h,),
-              ),
+              const SignUpWithGoogleButton(),
               SizedBox(height: 30.h,),
-
               Align(
                 alignment: Alignment.center,
                 child: Text( 'or', style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, color: const Color(0xFF555555),),
                 ),
               ),
               SizedBox(height: 30.h,),
-
               CustomMaterialButton(
                 buttonName: 'Continue with email',
                 buttonColor: const Color(0xff4E86F7),
@@ -59,10 +53,8 @@ class SignUpPageStepOne extends StatelessWidget {
                 },
               ),
               SizedBox(height: 16.h,),
-
-              const PrivacyPolicyText(),
+              PrivacyPolicyText(),
               const Spacer(flex: 1,),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -74,7 +66,6 @@ class SignUpPageStepOne extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 19.h,),
-
               const WorkiomLabel( ),
               SizedBox(height: 30.h,)
             ],

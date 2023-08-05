@@ -3,41 +3,54 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 
 // ---------- SignUp form ----------
-final signUpFormProvider = Provider<FormGroup>((ref) {
+final signUpFormProvider = Provider.autoDispose<FormGroup>((ref) {
   return FormGroup({
-    'email' : FormControl<String>(validators: [Validators.required, Validators.email]),
+    'email' : FormControl<String>(validators: [Validators.required, Validators.email ]),
     'password' : FormControl<String>(validators: [
       Validators.required,
       Validators.minLength(7),
       Validators.pattern(r'^(?=.*?[A-Z])', validationMessage: 'Password must have at least one uppercase letter'),
     ]),
-    'workspaceName': FormControl<String>(validators: [Validators.required ]),
-    'firstName': FormControl<String>(validators: [Validators.required ]),
-    'lastName': FormControl<String>(validators: [Validators.required ]),
+    'workspaceName': FormControl<String>(validators: [Validators.required, Validators.pattern(r'^[a-zA-Z].*', validationMessage: 'must start with a letter only'), ]),
+    'firstName': FormControl<String>(validators: [Validators.required, Validators.pattern(r'^[a-zA-Z]+$', validationMessage: ' first name should be Letters only') ]),
+    'lastName': FormControl<String>(validators: [Validators.required, Validators.pattern(r'^[a-zA-Z]+$', validationMessage: ' last name should be Letters only') ]),
   });
 });
 
 // ---------- is obscureText ----------
-final isObscureTextProvider = StateProvider<bool>((ref) {
+final isObscureTextProvider = StateProvider.autoDispose<bool>((ref) {
   return true;
 });
 
 // ---------- Linear progress indicator counter ----------
-final indicatorCounterProvider = StateProvider<double>((ref) {
+final indicatorCounterProvider = StateProvider.autoDispose<double>((ref) {
   return 0.0;
 });
 
 // ---------- Password length checker ----------
-final passwordLengthCheckerProvider = StateProvider<bool>((ref) {
+final passwordLengthCheckerProvider = StateProvider.autoDispose<bool>((ref) {
   return false;
 });
 
 // ---------- Password upercase checker ----------
-final passwordUpercaseCheckerProvider = StateProvider<bool>((ref) {
+final passwordUpercaseCheckerProvider = StateProvider.autoDispose<bool>((ref) {
   return false;
 });
 
 // ---------- is password Strong checker ----------
-final isPasswordStrongProvider = StateProvider<bool>((ref) {
+final isPasswordStrongProvider = StateProvider.autoDispose<bool>((ref) {
   return false;
 });
+
+/*
+// ---------- manage the user's authentication state. ----------
+final authProvider  = StateProvider<bool>((ref) {
+  return false;
+});
+
+// ---------- Check Authentication Status ----------
+final authStatusProvider = FutureProvider<bool>((ref) async {
+  ApiServices apiServices = ApiServices() ;
+  bool isLoggedIn = await apiServices.getCurrentLoginInformations();
+  return isLoggedIn;
+});*/

@@ -12,7 +12,6 @@ import 'package:workiom/src/features/user_managment/presentation_layer/widgets/c
 
 class SignUpPageStepTwo extends StatelessWidget {
   const SignUpPageStepTwo({super.key});
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,28 +29,21 @@ class SignUpPageStepTwo extends StatelessWidget {
                   child: Image.asset('assets/icons/user_managment/back_arrow.png', width: 18.w, height: 24.h,),
                 ),
                 SizedBox(height: 19.h,),
-
                 Text(
                   'Enter a strong password',
                   style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold, letterSpacing: 0.36.sp, color: const Color(0xFF0E0F12),),
                 ),
                 SizedBox(height: 8.h,),
-
                 const WavingLabel(),
                 SizedBox(height: 80.h,),
-
                 const AddEmailComponent(),
                 SizedBox(height: 24.h,),
-
                 const AddPasswordComponent(),
                 SizedBox(height: 15.h,),
-
                 const CustomLinearProgressIndicator(),
                 SizedBox(height: 9.h,),
-
                 const PasswordCheckerComponent(),
                 SizedBox(height: 30.h,),
-                
                 CustomMaterialButton(
                     buttonName: 'Confirm password',
                     onPressed: (){
@@ -60,7 +52,6 @@ class SignUpPageStepTwo extends StatelessWidget {
                       },));
                     }
                 ),
-
                 SizedBox(height: 90.h,),
                 const WorkiomLabel( ),
                 SizedBox(height: 80.h,)
