@@ -11,6 +11,7 @@ class AddFirstNameComponent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final signUpForm = ref.watch(signUpFormProvider);
+    final isStepThreeValid = ref.watch(isStepThreeValidProvider);
     return ReactiveForm(
       formGroup: signUpForm,
       child: Column(
@@ -24,6 +25,13 @@ class AddFirstNameComponent extends ConsumerWidget {
               SizedBox(width: 8.w,),
               Expanded(
                 child: ReactiveTextField(
+                  onChanged: (value) {
+                    if ( (signUpForm.control('workspaceName').valid == true) && (signUpForm.control('firstName').valid == true) && (signUpForm.control('lastName').valid == true) ) {
+                      ref.read(isStepThreeValidProvider.notifier).state = true;
+                    }  else {
+                      ref.read(isStepThreeValidProvider.notifier).state = false;
+                    }
+                  },
                   formControlName: 'firstName',
                   decoration: InputDecoration(
                     hintText: 'Enter your name',

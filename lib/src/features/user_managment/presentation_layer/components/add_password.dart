@@ -30,16 +30,22 @@ class AddPasswordComponent extends ConsumerWidget {
                     if ((signUpForm.control('email').valid == true) && (signUpForm.control('password').valid == true)) {
                       ref.read(indicatorCounterProvider.notifier).state= 1.0;
                       ref.read(isPasswordStrongProvider.notifier).state = true;
+                      ref.read(isStepTwoValidProvider.notifier).state = true;
                     }
                     else if ((signUpForm.control('email').valid == true) && (signUpForm.control('password').valid == false)) {
-                      ref.read(indicatorCounterProvider.notifier).state= 0.5; }
+                      ref.read(indicatorCounterProvider.notifier).state= 0.5;
+                      ref.read(isStepTwoValidProvider.notifier).state = false;
+                    }
+
                     else if ((signUpForm.control('email').valid == false) && (signUpForm.control('password').valid == true)) {
                       ref.read(indicatorCounterProvider.notifier).state= 0.5;
                       ref.read(isPasswordStrongProvider.notifier).state = true;
+                      ref.read(isStepTwoValidProvider.notifier).state = false;
                     }
                     else {
                       ref.read(indicatorCounterProvider.notifier).state= 0.0;
                       ref.read(isPasswordStrongProvider.notifier).state = false;
+                      ref.read(isStepTwoValidProvider.notifier).state = false;
                     }
                     // Conditions of Password length checker provider & Password upercase checker provider
                     if (signUpForm.control('password').value.toString().length < 7) {
@@ -49,9 +55,9 @@ class AddPasswordComponent extends ConsumerWidget {
                     }
                     // Conditions of Password upercase checker provider
                     if (signUpForm.control('password').value.toString().runes.any((rune) => rune >= 65 && rune <= 90)) {
-                      ref.read(passwordUpercaseCheckerProvider.notifier).state = true;
+                      ref.read(passwordUppercaseCheckerProvider.notifier).state = true;
                     }  else {
-                      ref.read(passwordUpercaseCheckerProvider.notifier).state = false;
+                      ref.read(passwordUppercaseCheckerProvider.notifier).state = false;
                     }
 
                   },
