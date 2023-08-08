@@ -4,6 +4,7 @@ import 'package:workiom/src/features/user_managment/presentation_layer/component
 import 'package:workiom/src/features/user_managment/presentation_layer/components/workiom_bottom_label.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/pages/sing_up_step_two.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/widgets/custom_material_button.dart';
+import 'package:workiom/src/features/user_managment/presentation_layer/widgets/language_selector.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/widgets/sign_up_with_google_button.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/widgets/terms_of_privacy_policy_text.dart';
 
@@ -55,16 +56,7 @@ class SignUpPageStepOne extends StatelessWidget {
               SizedBox(height: 16.h,),
               PrivacyPolicyText(),
               const Spacer(flex: 1,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/icons/user_managment/glob.png', width: 16.w,),
-                  SizedBox(width: 8.w,),
-                  const Text('English'),
-                  SizedBox(width: 8.w,),
-                  Image.asset('assets/icons/user_managment/toggle.png', width: 6.w, height: 4.h,),
-                ],
-              ),
+              const LanguageSelector(),
               SizedBox(height: 19.h,),
               const WorkiomLabel( ),
               SizedBox(height: 30.h,)

@@ -27,12 +27,16 @@ class AddEmailComponent extends ConsumerWidget {
                   onChanged: (value){
                     if ((signUpForm.control('email').valid == true) && (signUpForm.control('password').valid == true)) {
                       ref.read(indicatorCounterProvider.notifier).state= 1.0;
+                      ref.read(isStepTwoValidProvider.notifier).state = true;
                     } else if ((signUpForm.control('email').valid == true) && (signUpForm.control('password').valid == false)) {
                       ref.read(indicatorCounterProvider.notifier).state= 0.5;
+                      ref.read(isStepTwoValidProvider.notifier).state = false;
                     } else if ((signUpForm.control('email').valid == false) && (signUpForm.control('password').valid == true)) {
                       ref.read(indicatorCounterProvider.notifier).state= 0.5;
+                      ref.read(isStepTwoValidProvider.notifier).state = false;
                     } else {
                       ref.read(indicatorCounterProvider.notifier).state= 0.0;
+                      ref.read(isStepTwoValidProvider.notifier).state = false;
                     } },
                   formControlName: 'email',
                   decoration: InputDecoration(

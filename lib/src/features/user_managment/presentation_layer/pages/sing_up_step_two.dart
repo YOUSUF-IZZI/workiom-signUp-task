@@ -6,6 +6,7 @@ import 'package:workiom/src/features/user_managment/presentation_layer/component
 import 'package:workiom/src/features/user_managment/presentation_layer/components/waving_label.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/components/workiom_bottom_label.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/pages/sign_up_step_three.dart';
+import 'package:workiom/src/features/user_managment/presentation_layer/widgets/confirm_password_button.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/widgets/custom_linear_progress_indicator.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/widgets/custom_material_button.dart';
 
@@ -44,14 +45,7 @@ class SignUpPageStepTwo extends StatelessWidget {
                 SizedBox(height: 9.h,),
                 const PasswordCheckerComponent(),
                 SizedBox(height: 30.h,),
-                CustomMaterialButton(
-                    buttonName: 'Confirm password',
-                    onPressed: (){
-                      Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) {
-                        return const SignUpPageStepThree();
-                      },));
-                    }
-                ),
+                const ConfirmPasswordButton(),
                 SizedBox(height: 90.h,),
                 const WorkiomLabel( ),
                 SizedBox(height: 80.h,)

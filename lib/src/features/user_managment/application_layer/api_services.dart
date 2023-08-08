@@ -5,8 +5,8 @@ import 'dart:convert';
 class ApiServices
 {
   String baseUrl = 'http://api.workiom.site';
-
-  Future getCurrentLoginInformations(String tenantName) async {
+  // ----- Before registration we need to check if the tenant is available and not taken by another tenant
+  Future<dynamic> isTenantAvailable(String tenantName) async {
     final response = await http.post(
       Uri.parse('https://api.workiom.com/api/services/app/Account/IsTenantAvailable'),
       headers: <String, String>{
@@ -16,46 +16,41 @@ class ApiServices
         "tenancyName": tenantName
       }),
     );
-    var responseBody = jsonDecode(response.body);
-    // we can access the received data directly:
-    print('--------------------------');
-    print(responseBody['result']['tenantId']);
-
-    //return response;
-    /*if (response.statusCode == 200) {
+    if (response.statusCode == 200) {
       // we cant use the response body before decode the json data:
       var responseBody = jsonDecode(response.body);
-      // we can access the received data directly:
-      print('-------------------');
-      print(responseBody);
+      return responseBody['result']['tenantId'];
     } else {
-      throw Exception('Failed to create album.');
-    }*/
+      throw Exception('Failed to load api data.');
+    }
   }
 
+  void registerTenant(String email, String adminFirstName, String adminLastName, String adminPassword, String tenancyName) async{
+    final response = await http.post(
+      Uri.parse('https://api.workiom.com/api/services/app/TenantRegistration/RegisterTenant').replace(queryParameters: {"timeZone": "Europe/Istanbul"}),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
 
-  Future getPost() async{
-    Uri url = Uri.parse('https://jsonplaceholder.typicode.com/posts?userId=1');
-    var response = await http.get(url);
-    // we cant use the response body before decode the json data:
-    var responseBody = jsonDecode(response.body);
-    // we can access the received data directly:
-    print('-------------------');
-    print(responseBody[1]['title']);
-  }
-
-  Future addPosts() async{
-    Uri url = Uri.parse('https://jsonplaceholder.typicode.com/posts?userId=1');
-    var response = await http.post(url, body: {
-      'title' : 'yousif',
-      'body' : 'interview',
-      'userId' : '1'
-    });
-    // we cant use the response body before decode the json data:
-    var responseBody = jsonDecode(response.body);
-    // we can access the received data directly:
-    print('-------------------');
-    print(responseBody);
+      body: jsonEncode(<String, dynamic>{
+        "adminEmailAddress": email,
+        "adminFirstName": adminFirstName,
+        "adminLastName": adminLastName,
+        "adminPassword": adminPassword,
+        "captchaResponse": null,
+        "editionId": 2,
+        "name": tenancyName,
+        "tenancyName": tenancyName,
+      }),
+    );
+    if (response.statusCode == 200) {
+      // we cant use the response body before decode the json data:
+      var responseBody = jsonDecode(response.body);
+      print('-------------------------------');
+      print(responseBody['result']['tenantId']);
+    } else {
+      throw Exception('Failed to load api register.');
+    }
   }
 
 }

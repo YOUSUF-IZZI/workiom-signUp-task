@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:workiom/src/features/user_managment/application_layer/api_services.dart';
 import '../../state_managment/riverpod.dart';
 
 
 class AddWorkspaceComponent extends ConsumerWidget {
-  const  AddWorkspaceComponent({super.key});
-
+  AddWorkspaceComponent({super.key});
+  final ApiServices apiServices = ApiServices() ;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final signUpForm = ref.watch(signUpFormProvider);
@@ -24,6 +25,20 @@ class AddWorkspaceComponent extends ConsumerWidget {
               SizedBox(width: 8.w,),
               Expanded(
                 child: ReactiveTextField(
+                  onChanged: (value) async{
+                    /*if (( await apiServices.isTenantAvailable(signUpForm.control('workspaceName').value) ) != null) {
+                      ref.read(isTenantAvailableProvider.notifier).state = false;
+                    }*/
+                    if ( (signUpForm.control('workspaceName').valid == true) && (signUpForm.control('firstName').valid == true) && (signUpForm.control('lastName').valid == true) ) {
+                      ref.read(isStepThreeValidProvider.notifier).state = true;
+                    } else if ( (signUpForm.control('workspaceName').valid == true) && (signUpForm.control('firstName').valid == true) && (signUpForm.control('lastName').valid == true) ) {
+                      ref.read(isStepThreeValidProvider.notifier).state = false;
+                    } else if ( (signUpForm.control('workspaceName').valid == true) && (signUpForm.control('firstName').valid == true) && (signUpForm.control('lastName').valid == true) ) {
+                      ref.read(isStepThreeValidProvider.notifier).state = false;
+                    } else {
+                      ref.read(isStepThreeValidProvider.notifier).state = false;
+                    }
+                  },
                   formControlName: 'workspaceName',
                   decoration: InputDecoration(
                     hintText: 'Workspace name*',

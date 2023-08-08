@@ -12,7 +12,7 @@ class WavingLabel extends StatelessWidget {
         Text(
           'Let\'s start an amazing journey!',
           style: TextStyle(
-            fontSize: 17.sp,
+            fontSize: 16.sp,
             fontWeight: FontWeight.w400,
             color: const Color(0xFF555555),
           ),
