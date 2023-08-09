@@ -4,11 +4,12 @@ import 'dart:convert';
 
 class ApiServices
 {
-  String baseUrl = 'http://api.workiom.site';
+  String baseUrl = 'https://api.workiom.com';
+
   // ----- Before registration we need to check if the tenant is available and not taken by another tenant
   Future<dynamic> isTenantAvailable(String tenantName) async {
     final response = await http.post(
-      Uri.parse('https://api.workiom.com/api/services/app/Account/IsTenantAvailable'),
+      Uri.parse('$baseUrl/api/services/app/Account/IsTenantAvailable'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -25,9 +26,10 @@ class ApiServices
     }
   }
 
+  // ----- Register a tenant with user ---------------
   Future<dynamic> registerTenant(String email, String adminFirstName, String adminLastName, String adminPassword, String tenancyName) async{
     final response = await http.post(
-      Uri.parse('https://api.workiom.com/api/services/app/TenantRegistration/RegisterTenant?timeZone=Europe/Istanbul'),
+      Uri.parse('$baseUrl/api/services/app/TenantRegistration/RegisterTenant?timeZone=Europe/Istanbul'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -52,6 +54,40 @@ class ApiServices
     } else {
       return false;
     }
+  }
+
+  // ----- Login the user In ---------------
+  Future<dynamic> loginUserIn(String userNameOrEmailAddress, String password, String tenantName) async{
+    final response = await http.post(
+      Uri.parse('$baseUrl/api/TokenAuth/Authenticate'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "ianaTimeZone": "Europe/Istanbul",
+        "password": password,
+        "rememberClient": false,
+        "returnUrl": null,
+        "singleSignIn": false,
+        "tenantName": tenantName,
+        "userNameOrEmailAddress": userNameOrEmailAddress,
+      }),
+    );
+    var responseBody = jsonDecode(response.body);
+    return responseBody;
+  }
+
+  // ----- Get Current Login Information ---------------
+  Future<dynamic> getCurrentLoginInformation(String accessToken) async{
+    final response = await http.get(
+      Uri.parse('$baseUrl/api/services/app/Session/GetCurrentLoginInformations'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $accessToken'
+      },
+    );
+    var responseBody = jsonDecode(response.body);
+    return responseBody['result']['user'];
   }
 
 }

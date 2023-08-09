@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ---------- SignUp form ----------
 final signUpFormProvider = Provider.autoDispose<FormGroup>((ref) {
@@ -65,18 +66,8 @@ final isStepThreeValidProvider = StateProvider.autoDispose<bool>((ref) {
   return false;
 });
 
-
-
-
-/*
-// ---------- manage the user's authentication state. ----------
-final authProvider  = StateProvider<bool>((ref) {
-  return false;
+// ---------- language provider ----------
+final accessTokenProvider = StateProvider<String>((ref) {
+  return '';
 });
 
-// ---------- Check Authentication Status ----------
-final authStatusProvider = FutureProvider<bool>((ref) async {
-  ApiServices apiServices = ApiServices() ;
-  bool isLoggedIn = await apiServices.getCurrentLoginInformations();
-  return isLoggedIn;
-});*/

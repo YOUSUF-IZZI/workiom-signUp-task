@@ -20,7 +20,7 @@ class PasswordCheckerComponent extends ConsumerWidget {
             SizedBox(width: 8.w,),
             Consumer(builder: (context, ref, child) {
               final isPasswordStrong = ref.watch(isPasswordStrongProvider);
-              return Text(isPasswordStrong ? 'Strong Password' : 'Not enought strong', style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold ),);
+              return Text(isPasswordStrong ? 'Pretty safe' : 'Not enought strong', style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold ),);
             },)
           ],
         ),

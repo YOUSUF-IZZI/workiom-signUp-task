@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:reactive_forms/reactive_forms.dart';
 import 'package:workiom/src/features/user_managment/application_layer/api_services.dart';
+import 'package:workiom/src/features/user_managment/presentation_layer/pages/home_page.dart';
 import 'package:workiom/src/features/user_managment/state_managment/riverpod.dart';
 
 
@@ -36,7 +36,7 @@ class CreateWorkSpaceButton extends ConsumerWidget {
             );
             if (returnedValue == true) {
               // if post method done show CupertinoAlertDialog says done.
-              Future.delayed(const Duration(milliseconds: 1), () {
+              await Future.delayed(const Duration(milliseconds: 10), () {
                 showCupertinoDialog(context: context, builder: (context) {
                   return CupertinoAlertDialog(
                     title: Lottie.asset('assets/lottie_files/done.json', width: 90.w, height: 90.h),
@@ -44,8 +44,46 @@ class CreateWorkSpaceButton extends ConsumerWidget {
                   );
                 },);
               });
+              await Future.delayed(const Duration(seconds: 1), ()async{
+                final responseBody = await apiServices.loginUserIn(
+                    signUpForm.control('email').value,
+                    signUpForm.control('password').value,
+                    signUpForm.control('workspaceName').value
+                );
+                if (responseBody['success'] == true) {
+                  // Save the accessToken in accessToken provider
+                  ref.read(accessTokenProvider.notifier).state = responseBody['result']['accessToken'];
+                  // now navigate to the home page
+                  await Future.delayed(const Duration(milliseconds: 1), (){
+                    Navigator.of(context).popUntil((route) => false);
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) {
+                      return const HomePage();
+                    },));
+                  });
+                }
+                else if (responseBody['success'] != true) {
+                  await Future.delayed(const Duration(milliseconds: 1), () {
+                    showCupertinoDialog(context: context, builder: (context) {
+                      return CupertinoAlertDialog(
+                        title: Lottie.asset('assets/lottie_files/alert_triangle2.json', width: 90.w, height: 90.h),
+                        content: Text(responseBody['error']['message'], style: TextStyle(fontSize: 16.sp, color: Colors.red),),
+                      );
+                    },);
+                  });
+                }
+                else {
+                  await Future.delayed(const Duration(milliseconds: 1), () {
+                    showCupertinoDialog(context: context, builder: (context) {
+                      return CupertinoAlertDialog(
+                        title: Lottie.asset('assets/lottie_files/wondering_man.json', width: 90.w, height: 90.h),
+                        content: Text('Something went Wrong!', style: TextStyle(fontSize: 16.sp, color: Colors.red),),
+                      );
+                    },);
+                  });
+                }
+              });
             }  else {
-              Future.delayed(const Duration(milliseconds: 1), () {
+              await Future.delayed(const Duration(milliseconds: 1), () {
                 showCupertinoDialog(context: context, builder: (context) {
                   return CupertinoAlertDialog(
                     title: Lottie.asset('assets/lottie_files/wondering_man.json', width: 90.w, height: 90.h),
