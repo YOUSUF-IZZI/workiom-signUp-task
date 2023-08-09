@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 
 // ---------- SignUp form ----------
 final signUpFormProvider = Provider.autoDispose<FormGroup>((ref) {
