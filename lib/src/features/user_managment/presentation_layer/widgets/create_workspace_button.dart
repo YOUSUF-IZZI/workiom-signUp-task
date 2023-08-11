@@ -22,8 +22,6 @@ class CreateWorkSpaceButton extends ConsumerWidget {
         borderRadius: BorderRadius.circular(18),
       ),
       color: isStepThreeValid ? const Color(0xFF4E86F7) : const Color(0xFFB5B5B5),
-      highlightColor: Colors.orangeAccent,
-      splashColor: Colors.redAccent,
       onPressed: () async{
         if (isStepThreeValid) {
           if (isTenantAvailable) {
@@ -118,7 +116,13 @@ class CreateWorkSpaceButton extends ConsumerWidget {
           const Spacer(flex: 3 ,),
           Text('Create Workspace', style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold, color: Colors.white), textAlign: TextAlign.center,),
           const Spacer(flex: 2,),
-          Image.asset('assets/icons/user_managment/enter.png', width: 19.w, height: 19 .h ,)
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset('assets/icons/user_managment/enter_background.png', width: 24.w  ),
+              Image.asset('assets/icons/user_managment/enter.png', width: 19.w, height: 19 .h ,),
+            ],
+          ),
         ],
       ),
     );

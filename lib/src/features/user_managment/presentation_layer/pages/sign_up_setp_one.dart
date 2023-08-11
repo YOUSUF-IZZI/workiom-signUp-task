@@ -10,7 +10,7 @@ import 'package:workiom/src/features/user_managment/presentation_layer/widgets/t
 
 
 class SignUpPageStepOne extends StatelessWidget {
-  const SignUpPageStepOne({super.key});
+  const  SignUpPageStepOne({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,6 @@ class SignUpPageStepOne extends StatelessWidget {
                 ),
                 SizedBox(height: 16.h,),
                 PrivacyPolicyText(),
-                //const Spacer(flex: 1,),
                 SizedBox(height: 100.h,),
                 const LanguageSelector(),
                 SizedBox(height: 19.h,),

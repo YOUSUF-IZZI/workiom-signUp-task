@@ -32,7 +32,13 @@ class ConfirmPasswordButton extends ConsumerWidget {
           const Spacer(flex: 3 ,),
           Text('Confirm password', style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold, color: Colors.white), textAlign: TextAlign.center,),
           const Spacer(flex: 2,),
-          Image.asset('assets/icons/user_managment/enter.png', width: 19.w, height: 19 .h ,)
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset('assets/icons/user_managment/enter_background.png', width: 24.w  ),
+              Image.asset('assets/icons/user_managment/enter.png', width: 19.w, height: 19 .h ,),
+            ],
+          ),
         ],
       ),
     );

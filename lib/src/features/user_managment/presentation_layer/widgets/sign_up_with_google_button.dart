@@ -8,12 +8,13 @@ class SignUpWithGoogleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       height: 50.h,
+      elevation: 0.3,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
       ),
       color: const Color(0xFFF4F4F4),
-      highlightColor: Colors.orangeAccent,
-      splashColor: Colors.redAccent,
+      //highlightColor: Colors.orangeAccent,
+      //splashColor: Colors.redAccent,
       onPressed: (){},
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
