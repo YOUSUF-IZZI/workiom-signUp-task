@@ -5,10 +5,8 @@ import 'package:workiom/src/features/user_managment/presentation_layer/component
 import 'package:workiom/src/features/user_managment/presentation_layer/components/password_checker.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/components/waving_label.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/components/workiom_bottom_label.dart';
-import 'package:workiom/src/features/user_managment/presentation_layer/pages/sign_up_step_three.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/widgets/confirm_password_button.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/widgets/custom_linear_progress_indicator.dart';
-import 'package:workiom/src/features/user_managment/presentation_layer/widgets/custom_material_button.dart';
 
 
 class SignUpPageStepTwo extends StatelessWidget {
@@ -40,15 +38,15 @@ class SignUpPageStepTwo extends StatelessWidget {
                 const AddEmailComponent(),
                 SizedBox(height: 24.h,),
                 const AddPasswordComponent(),
-                SizedBox(height: 15.h,),
+                SizedBox(height: 16.h,),
                 const CustomLinearProgressIndicator(),
-                SizedBox(height: 9.h,),
+                SizedBox(height: 10.h,),
                 const PasswordCheckerComponent(),
                 SizedBox(height: 30.h,),
                 const ConfirmPasswordButton(),
-                SizedBox(height: 90.h,),
+                SizedBox(height: 136.h,),
                 const WorkiomLabel( ),
-                SizedBox(height: 80.h,)
+                SizedBox(height: 77.h,)
               ],
             ),
           ),

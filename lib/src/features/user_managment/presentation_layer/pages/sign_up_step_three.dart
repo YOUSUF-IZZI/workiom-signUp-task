@@ -6,7 +6,6 @@ import 'package:workiom/src/features/user_managment/presentation_layer/component
 import 'package:workiom/src/features/user_managment/presentation_layer/components/waving_label.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/components/workiom_bottom_label.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/widgets/create_workspace_button.dart';
-import 'package:workiom/src/features/user_managment/presentation_layer/widgets/custom_material_button.dart';
 
 
 class SignUpPageStepThree extends StatelessWidget {
@@ -38,13 +37,13 @@ class SignUpPageStepThree extends StatelessWidget {
                 AddWorkspaceComponent(),
                 SizedBox(height: 24.h,),
                 const AddFirstNameComponent(),
-                SizedBox(height: 15.h,),
+                SizedBox(height: 24.h,),
                 const AddLastNameComponent(),
                 SizedBox(height: 28.h,),
                 CreateWorkSpaceButton(),
-                SizedBox(height: 90.h,),
+                SizedBox(height: 136.h,),
                 const WorkiomLabel( ),
-                SizedBox(height: 80.h,)
+                SizedBox(height: 77.h,)
               ],
             ),
           ),

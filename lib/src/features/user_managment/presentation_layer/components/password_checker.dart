@@ -14,13 +14,13 @@ class PasswordCheckerComponent extends ConsumerWidget {
         Row(
           children: [
             Consumer(builder: (context, ref, child) {
-              final isPasswordStrong = ref.watch(isPasswordStrongProvider);
-              return isPasswordStrong ? Image.asset('assets/icons/user_managment/right_mark.png', width: 16.w,) : Image.asset('assets/icons/user_managment/exclamation_mark.png', width: 16.w, height: 16.h,);
+              final indicatorCounter = ref.watch(indicatorCounterProvider);
+              return Image.asset(indicatorCounter < 1/4 ? 'assets/icons/user_managment/wrong_mark.png' : indicatorCounter < 3/4 ? 'assets/icons/user_managment/exclamation_mark.png' : 'assets/icons/user_managment/right_mark.png', width: 16.w, height: 16.h,);
             },),
             SizedBox(width: 8.w,),
             Consumer(builder: (context, ref, child) {
-              final isPasswordStrong = ref.watch(isPasswordStrongProvider);
-              return Text(isPasswordStrong ? 'Pretty safe' : 'Not enought strong', style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold ),);
+              final indicatorCounter = ref.watch(indicatorCounterProvider);
+              return Text(indicatorCounter < 1/4 ? 'weak' : indicatorCounter < 3/4 ? 'Not enought strong' : 'Pretty safe' , style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold ),);
             },)
           ],
         ),
@@ -29,7 +29,7 @@ class PasswordCheckerComponent extends ConsumerWidget {
           children: [
             Consumer(builder: (context, ref, child) {
               final passwordLengthChecker = ref.watch(passwordLengthCheckerProvider);
-              return passwordLengthChecker ? Image.asset('assets/icons/user_managment/right_mark.png', width: 16.w,) : Image.asset('assets/icons/user_managment/wrong_mark.png', width: 16.w, height: 16.h,) ;
+              return Image.asset(passwordLengthChecker ? 'assets/icons/user_managment/right_mark.png' : 'assets/icons/user_managment/wrong_mark.png' ,width: 16.w, height: 16.h,) ;
             },),
             SizedBox(width: 8.w,),
             Text('Passwords must have at least 7 characters', style: TextStyle(fontSize: 12.sp),)
@@ -39,8 +39,8 @@ class PasswordCheckerComponent extends ConsumerWidget {
         Row(
           children: [
             Consumer(builder: (context, ref, child) {
-              final passwordUpercaseChecker = ref.watch(passwordUppercaseCheckerProvider);
-              return passwordUpercaseChecker ? Image.asset('assets/icons/user_managment/right_mark.png', width: 16.w,) : Image.asset('assets/icons/user_managment/wrong_mark.png', width: 16.w,) ;
+              final passwordUppercaseChecker = ref.watch(passwordUppercaseCheckerProvider);
+              return Image.asset(passwordUppercaseChecker ? 'assets/icons/user_managment/right_mark.png' : 'assets/icons/user_managment/wrong_mark.png', width: 16.w, height: 16.h,) ;
             },),
             SizedBox(width: 8.w,),
             Text('Passwords must have at least one uppercase (\'A\'-\'Z\').', style: TextStyle(fontSize: 12.sp),)

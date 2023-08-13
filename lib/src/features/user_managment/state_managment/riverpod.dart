@@ -1,16 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 
-// ---------- SignUp form ----------
+// -------------------- SignUp forms and Text Editing Controllers --------------------
 final signUpFormProvider = Provider.autoDispose<FormGroup>((ref) {
   return FormGroup({
-    'email' : FormControl<String>(validators: [Validators.required, Validators.email, ]),
-    'password' : FormControl<String>(validators: [
-      Validators.required,
-      Validators.minLength(7),
-      Validators.pattern(r'^(?=.*?[A-Z])', validationMessage: 'Password must have at least one uppercase letter'),
-    ]),
     'workspaceName': FormControl<String>(validators: [
       Validators.required,
       Validators.pattern(r'^[a-zA-Z].*', validationMessage: 'must start with a letter only')
@@ -19,6 +14,14 @@ final signUpFormProvider = Provider.autoDispose<FormGroup>((ref) {
     'lastName': FormControl<String>(validators: [Validators.required, Validators.pattern(r'^[a-zA-Z]+$', validationMessage: ' last name should be Letters only') ]),
   });
 });
+
+
+// ---------- Email provider ----------
+final emailTextEditingControllerProvider = Provider.autoDispose<TextEditingController>((ref) => TextEditingController());
+// ---------- Password provider ----------
+final passwordTextEditingControllerProvider = Provider.autoDispose<TextEditingController>((ref) => TextEditingController());
+
+
 
 // ---------- is obscureText ----------
 final isObscureTextProvider = StateProvider.autoDispose<bool>((ref) {

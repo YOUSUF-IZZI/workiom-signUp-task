@@ -13,7 +13,8 @@ class WorkiomLabel extends StatelessWidget {
         Text('Stay organized with', style: TextStyle(fontSize: 15.sp, color: const Color(0xFF555555)),),
         SizedBox(width: 8.h,),
         Image.asset('assets/icons/user_managment/workiom.png', width: 31.w, height: 31.h,),
-        Image.asset('assets/icons/user_managment/workiom_text.png', width: 69.w, height: 31.h,)
+        SizedBox(width: 7.w,),
+        Text('workiom', style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),)
       ],
     );
   }

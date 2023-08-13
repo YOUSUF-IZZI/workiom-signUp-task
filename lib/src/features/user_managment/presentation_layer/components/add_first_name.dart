@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import '../../state_managment/riverpod.dart';
+import 'package:workiom/src/features/user_managment/presentation_layer/components/add_last_name.dart';
+import 'package:workiom/src/features/user_managment/presentation_layer/components/add_workspace.dart';
+import 'package:workiom/src/features/user_managment/state_managment/riverpod.dart';
 
+
+// ---------- FirstName provider & Global key ----------
+final firstNameTextEditingControllerProvider = Provider.autoDispose<TextEditingController>((ref) => TextEditingController());
+GlobalKey<FormState> firstNameForm = GlobalKey<FormState>();
 
 class AddFirstNameComponent extends ConsumerWidget {
   const AddFirstNameComponent({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final signUpForm = ref.watch(signUpFormProvider);
-    final isStepThreeValid = ref.watch(isStepThreeValidProvider);
-    return ReactiveForm(
-      formGroup: signUpForm,
+    final firstNameController = ref.watch(firstNameTextEditingControllerProvider);
+    return Form(
+      key: firstNameForm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,19 +28,30 @@ class AddFirstNameComponent extends ConsumerWidget {
               Image.asset('assets/icons/user_managment/alignment.png', width: 18.w, height: 18.h,),
               SizedBox(width: 8.w,),
               Expanded(
-                child: ReactiveTextField(
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: firstNameController,
+                  validator: (text){
+                    if (firstNameController.text.isEmpty) {
+                      return 'This field is required.';
+                    }
+                    if (!firstNameController.text.contains(RegExp(r'^[a-zA-Z]+$'))) {
+                      return 'First name should be Letters only';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Enter your name',
+                    contentPadding: EdgeInsets.only(top: 15, bottom: 13.h),
+                  ),
                   onChanged: (value) {
-                    if ( (signUpForm.control('workspaceName').valid == true) && (signUpForm.control('firstName').valid == true) && (signUpForm.control('lastName').valid == true) ) {
+                    // Setting isStepThreeValidProvider value
+                    if (workspaceForm.currentState!.validate() && firstNameForm.currentState!.validate() && lastNameForm.currentState!.validate()) {
                       ref.read(isStepThreeValidProvider.notifier).state = true;
                     }  else {
                       ref.read(isStepThreeValidProvider.notifier).state = false;
                     }
                   },
-                  formControlName: 'firstName',
-                  decoration: InputDecoration(
-                    hintText: 'Enter your name',
-                    contentPadding: EdgeInsets.only(top: 15, bottom: 13.h),
-                  ),
                 ),
               ),
             ],
