@@ -6,13 +6,10 @@ import 'package:workiom/src/features/user_managment/presentation_layer/component
 import 'package:workiom/src/features/user_managment/state_managment/riverpod.dart';
 
 
-// ---------- FirstName provider & Global key ----------
-final firstNameTextEditingControllerProvider = Provider.autoDispose<TextEditingController>((ref) => TextEditingController());
 GlobalKey<FormState> firstNameForm = GlobalKey<FormState>();
 
 class AddFirstNameComponent extends ConsumerWidget {
   const AddFirstNameComponent({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final firstNameController = ref.watch(firstNameTextEditingControllerProvider);

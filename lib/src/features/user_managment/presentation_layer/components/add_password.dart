@@ -6,8 +6,6 @@ import '../../state_managment/riverpod.dart';
 
 class AddPasswordComponent extends ConsumerWidget {
   const AddPasswordComponent({super.key});
-
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isObscure = ref.watch(isObscureTextProvider);

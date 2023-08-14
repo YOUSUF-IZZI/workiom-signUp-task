@@ -8,8 +8,7 @@ import 'package:workiom/src/features/user_managment/presentation_layer/component
 import '../../state_managment/riverpod.dart';
 
 
-// ---------- Workspace provider & Global key ----------
-final workspaceTextEditingControllerProvider = Provider.autoDispose<TextEditingController>((ref) => TextEditingController());
+
 GlobalKey<FormState> workspaceForm = GlobalKey<FormState>();
 
 class AddWorkspaceComponent extends ConsumerWidget {
