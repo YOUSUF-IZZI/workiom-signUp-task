@@ -13,11 +13,8 @@ class SecureStorageServices
   Future<String> readAccessToken() async{
     String? token = await accessTokenStorage.read(key: 'accessToken');
     if (token != null) {
-      print('------------------------------');
-      print('readAccessToken function done:  $token');
       return token;
     }  else {
-      print('readAccessToken failed ---------------------------------');
       return '';
     }
   }

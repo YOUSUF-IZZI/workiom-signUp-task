@@ -49,9 +49,6 @@ class ApiServices
     if (response.statusCode == 200) {
       // we cant use the response body before decode the json data:
       var responseBody = jsonDecode(response.body);
-      print('-------------------------------');
-      print(responseBody['success']);
-      print(responseBody['result']['tenantId']);
       return responseBody['success'];
     } else {
       return false;
@@ -89,10 +86,6 @@ class ApiServices
       },
     );
     var responseBody = jsonDecode(response.body);
-    // test print
-    print('--------------------------------------------');
-    print('from getCurrentLoginInformation: user info: ${responseBody['result']['user']}');
     return responseBody['result']['user']['name'];
   }
-
 }

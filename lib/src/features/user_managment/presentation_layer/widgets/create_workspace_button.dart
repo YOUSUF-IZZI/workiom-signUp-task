@@ -30,8 +30,6 @@ class CreateWorkSpaceButton extends ConsumerWidget {
       color: isStepThreeValid ? const Color(0xFF4E86F7) : const Color(0xFFB5B5B5),
       onPressed: () async{
         if (isStepThreeValid) {
-          // test print
-          print('tep3 valid --------------------------');
           // make the step2 and step3 as not valid and active the CircularProgressIndicator
           ref.read(isStepThreeValidProvider.notifier).state = false;
           ref.read(isCircularProgressIndicatorLoading.notifier).state = true;
@@ -43,8 +41,6 @@ class CreateWorkSpaceButton extends ConsumerWidget {
               workspaceController.text
           );
           if (returnedValue == true) {
-            // test print
-            print('registerTenant operation done  -----------------------------');
             await Future.delayed(const Duration(seconds: 1), ()async{
               final responseBody = await apiServices.loginUserIn(
                   emailController.text,
@@ -52,11 +48,7 @@ class CreateWorkSpaceButton extends ConsumerWidget {
                   workspaceController.text
               );
               if (responseBody['success'] == true) {
-                // test print
-                print('loginUserIn operation done  ------------------------');
                 // Save the accessToken in accessToken provider
-                // test print
-                print('access token is: ${responseBody['result']['accessToken']}-------------------');
                 await SecureStorageServices().writeAccessToken(responseBody['result']['accessToken']);
                 // now navigate to the home page
                 await Future.delayed(const Duration(milliseconds: 1), (){

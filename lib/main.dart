@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:workiom/src/features/user_managment/application_layer/api_services.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/pages/home_page.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/pages/sign_up_setp_one.dart';
@@ -29,9 +30,13 @@ class MyApp extends StatelessWidget {
           home: FutureBuilder(
             future: ApiServices().getCurrentLoginInformation(),
             builder: (context, snapshot) {
-              if (snapshot.data != null) {
-                return const HomePage();
-              }  else {
+              if (snapshot.hasData) {
+                if (snapshot.data != null) {
+                  return const HomePage();
+                } else {
+                  return const SignUpPageStepOne();
+                }
+              } else {
                 return const SignUpPageStepOne();
               }
             },
