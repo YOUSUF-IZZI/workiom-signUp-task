@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:workiom/src/features/user_managment/application_layer/secure_storage_services.dart';
+
 
 class ApiServices
 {
@@ -78,16 +80,19 @@ class ApiServices
   }
 
   // ----- Get Current Login Information ---------------
-  Future<dynamic> getCurrentLoginInformation(String accessToken) async{
+  Future<String?> getCurrentLoginInformation() async{
     final response = await http.get(
       Uri.parse('$baseUrl/api/services/app/Session/GetCurrentLoginInformations'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $accessToken'
+        'Authorization': 'Bearer ${await SecureStorageServices().readAccessToken()}'
       },
     );
     var responseBody = jsonDecode(response.body);
-    return responseBody['result']['user'];
+    // test print
+    print('--------------------------------------------');
+    print('from getCurrentLoginInformation: user info: ${responseBody['result']['user']}');
+    return responseBody['result']['user']['name'];
   }
 
 }

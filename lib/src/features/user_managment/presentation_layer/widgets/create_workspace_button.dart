@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:workiom/src/features/user_managment/application_layer/api_services.dart';
+import 'package:workiom/src/features/user_managment/application_layer/secure_storage_services.dart';
 import 'package:workiom/src/features/user_managment/presentation_layer/pages/home_page.dart';
 import 'package:workiom/src/features/user_managment/state_managment/riverpod.dart';
 
@@ -29,6 +30,11 @@ class CreateWorkSpaceButton extends ConsumerWidget {
       color: isStepThreeValid ? const Color(0xFF4E86F7) : const Color(0xFFB5B5B5),
       onPressed: () async{
         if (isStepThreeValid) {
+          // test print
+          print('tep3 valid --------------------------');
+          // make the step2 and step3 as not valid and active the CircularProgressIndicator
+          ref.read(isStepThreeValidProvider.notifier).state = false;
+          ref.read(isCircularProgressIndicatorLoading.notifier).state = true;
           final returnedValue = await apiServices.registerTenant(
               emailController.text,
               firstNameController.text,
@@ -37,9 +43,8 @@ class CreateWorkSpaceButton extends ConsumerWidget {
               workspaceController.text
           );
           if (returnedValue == true) {
-            // make the step2 and step3 as not valid and active the CircularProgressIndicator
-            ref.read(isStepThreeValidProvider.notifier).state = false;
-            ref.read(isCircularProgressIndicatorLoading.notifier).state = true;
+            // test print
+            print('registerTenant operation done  -----------------------------');
             await Future.delayed(const Duration(seconds: 1), ()async{
               final responseBody = await apiServices.loginUserIn(
                   emailController.text,
@@ -47,8 +52,12 @@ class CreateWorkSpaceButton extends ConsumerWidget {
                   workspaceController.text
               );
               if (responseBody['success'] == true) {
+                // test print
+                print('loginUserIn operation done  ------------------------');
                 // Save the accessToken in accessToken provider
-                ref.read(accessTokenProvider.notifier).state = responseBody['result']['accessToken'];
+                // test print
+                print('access token is: ${responseBody['result']['accessToken']}-------------------');
+                await SecureStorageServices().writeAccessToken(responseBody['result']['accessToken']);
                 // now navigate to the home page
                 await Future.delayed(const Duration(milliseconds: 1), (){
                   Navigator.of(context).popUntil((route) => false);

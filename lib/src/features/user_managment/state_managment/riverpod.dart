@@ -58,11 +58,3 @@ final isStepThreeValidProvider = StateProvider.autoDispose<bool>((ref) {
 final isCircularProgressIndicatorLoading = StateProvider<bool>((ref) => false);
 
 
-// ---------- Authentication providers ----------
-final accessTokenProvider = StateProvider<String>((ref) {
-  return '';
-});
-final isAuth = StateProvider<bool>((ref) {
-  return false;
-});
-
